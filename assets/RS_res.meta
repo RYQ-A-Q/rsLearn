@@ -1,0 +1,25 @@
+{
+  "ver": "1.2.0",
+  "importer": "directory",
+  "imported": true,
+  "uuid": "2b921a9c-8b36-4c91-a11c-bb87a3e5e9b5",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "isBundle": true,
+    "priority": 7,
+    "bundleFilterConfig": [
+      {
+        "range": "exclude",
+        "type": "asset",
+        "patchOption": {
+          "patchType": "glob",
+          "value": "db://assets/*.test"
+        },
+        "assets": [
+          "934b98ac-a615-47bd-b487-4c524ddc99ed"
+        ]
+      }
+    ]
+  }
+}

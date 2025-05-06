@@ -1,0 +1,134 @@
+{
+  "ver": "1.0.27",
+  "importer": "image",
+  "imported": true,
+  "uuid": "803b26c4-1694-4ffa-ba7d-db5c1e787572",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "803b26c4-1694-4ffa-ba7d-db5c1e787572@6c48a",
+      "displayName": "flower_azalea",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "imageUuidOrDatabaseUri": "803b26c4-1694-4ffa-ba7d-db5c1e787572",
+        "isUuid": true,
+        "visible": false,
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "803b26c4-1694-4ffa-ba7d-db5c1e787572@f9941",
+      "displayName": "flower_azalea",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0.5,
+        "offsetY": -3,
+        "trimX": 9,
+        "trimY": 11,
+        "width": 353,
+        "height": 298,
+        "rawWidth": 370,
+        "rawHeight": 314,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [
+            -176.5,
+            -149,
+            0,
+            176.5,
+            -149,
+            0,
+            -176.5,
+            149,
+            0,
+            176.5,
+            149,
+            0
+          ],
+          "indexes": [
+            0,
+            1,
+            2,
+            2,
+            1,
+            3
+          ],
+          "uv": [
+            9,
+            303,
+            362,
+            303,
+            9,
+            5,
+            362,
+            5
+          ],
+          "nuv": [
+            0.024324324324324326,
+            0.01592356687898089,
+            0.9783783783783784,
+            0.01592356687898089,
+            0.024324324324324326,
+            0.964968152866242,
+            0.9783783783783784,
+            0.964968152866242
+          ],
+          "minPos": [
+            -176.5,
+            -149,
+            0
+          ],
+          "maxPos": [
+            176.5,
+            149,
+            0
+          ]
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "803b26c4-1694-4ffa-ba7d-db5c1e787572@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "type": "sprite-frame",
+    "hasAlpha": true,
+    "fixAlphaTransparencyArtifacts": false,
+    "redirect": "803b26c4-1694-4ffa-ba7d-db5c1e787572@6c48a"
+  }
+}

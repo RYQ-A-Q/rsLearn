@@ -1,0 +1,26 @@
+{
+    "bgm": {
+        "main": "audios/bg/bgSound",
+        "gambel": "audios/bg/gambel",
+        "game_day": "audios/bg/游戏白天",
+        "game_night": "audios/bg/游戏黑夜",
+        "happy": "audios/bg/happy"
+    },
+    "ui": {
+        "alive": "audios/ui/alive",
+        "btn_normalClick": "audios/ui/btn_normalClick",
+        "btn_switchClick": "audios/ui/btn_switchClick",
+        "collider": "audios/ui/collider",
+        "error_尖锐": "audios/ui/error_尖锐",
+        "error_回响": "audios/ui/error_回响",
+        "error_颤抖": "audios/ui/error_颤抖",
+        "sad": "audios/ui/sad",
+        "success1": "audios/ui/success1",
+        "success2": "audios/ui/success2",
+        "switch": "audios/ui/switch",
+        "敲钟": "audios/ui/敲钟",
+        "木鱼": "audios/ui/木鱼",
+        "蝉鸣": "audios/ui/蝉鸣",
+        "鸡鸣": "audios/ui/鸡鸣"
+    }
+}
