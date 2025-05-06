@@ -5,11 +5,6 @@ const { ccclass, property } = _decorator;
 export class Index extends Component {
     start() {
         rs.loader()
-
-    }
-
-    update(deltaTime: number) {
-
     }
 }
 

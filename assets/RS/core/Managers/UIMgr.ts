@@ -1,13 +1,12 @@
-import { Node, Prefab, instantiate, warn } from 'cc';
+import { Node, Prefab, instantiate, log, warn } from 'cc';
+import { UIPanelType } from '../constants/SysEnums';
 
 type UIMap = { [key: string]: Node }
 
 export class UIMgr {
-    private static _instance: UIMgr
+    private static _instance: UIMgr = new UIMgr();
+    private _panelRoots: Record<UIPanelType, Node> = {} as any
     public static getInstance(): UIMgr {
-        if (!this._instance) {
-            this._instance = new UIMgr()
-        }
         return this._instance
     }
 
@@ -19,38 +18,56 @@ export class UIMgr {
     /**初始化
      * @param uiRoot UI 根节点
      */
-    init(uiRoot: Node) {
-        this._uiRoot = uiRoot
+    init(panelRoots: Record<UIPanelType, Node>) {
+        this._panelRoots = panelRoots
     }
 
     /**
      * 打开 UI 窗口
-     * @param path prefab 相对路径（基于 rs.resources 资源配置）
-     * @param key 缓存 key（可选，默认使用 path）
-     * @param callback 加载完成回调
+     * @param name ui名称
+     * @param path 路径
+     * @param type 挂载容器类型
+     * @param callback 加载完成回调，返回目标节点
      */
-    public open(path: string, key?: string, callback?: (node: Node) => void): void {
-        const cacheKey = key || path
+    public open(name: string, path: string, type: UIPanelType = UIPanelType.Popup, callback?: (node: Node) => void): void {
+        if (!this._panelRoots[type]) {
+            warn(`[UIMgr] 未找到指定的挂载容器：${type}`)
+            return
+        }
+        const cacheKey = name || path
+        if (rs.pools.has(cacheKey)) {//优先考虑对象池
+            log("[UIMgr] 获取对象池对象：" + cacheKey)
+            let node = rs.pools.get(cacheKey)
+            node.active = true
+            this._panelRoots[type].addChild(node)
+            this._panelRoots[type].active = true
+            callback?.(node)
+            return
+        }
 
-        if (this._uiCache[cacheKey]) {
+        if (this._uiCache[cacheKey] && !this._uiCache[cacheKey].active) {//已经存在并且是不激活状态
             this._uiCache[cacheKey].active = true
+            this._panelRoots[type].addChild(this._uiCache[cacheKey])
+            this._panelRoots[type].active = true
             callback?.(this._uiCache[cacheKey])
             return
         }
 
-        rs.resources.load(path, Prefab, (err, prefab) => {
+        rs.resources.load(name, Prefab, (err, prefab) => {
             if (err || !prefab) {
-                warn(`[UIMgr] 加载 UI 失败：${path}`, err)
+                warn(`[UIMgr] 加载 UI 失败：${name}`, err)
                 return
             }
-
+            log(`[UIMgr] 加载 UI：${name}`)
             const node = instantiate(prefab)
-            node.name = cacheKey
-            this._uiRoot.addChild(node)
+            this._panelRoots[type].addChild(node)
+            node.active = true
+            this._panelRoots[type].active = true
             this._uiCache[cacheKey] = node
             callback?.(node)
         })
     }
+
 
     /**
      * 关闭 UI

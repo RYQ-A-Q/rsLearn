@@ -1,5 +1,6 @@
 import { assetManager, AssetManager, director, error, instantiate, JsonAsset, log, Prefab, warn } from "cc";
 import { AppConfig, RSConfig } from "./core/constants/GameConfig";
+import { UIPanelType } from "./core/constants/SysEnums";
 import { assetMgr } from "./core/Managers/AssetMgr";
 import { audioMgr } from "./core/Managers/AudioMgr";
 import { bundleMgr } from "./core/Managers/BundleMgr";
@@ -53,7 +54,12 @@ class RS {
                             let newNode = instantiate(prefab)
                             newNode.parent = director.getScene()
                             director.addPersistRootNode(newNode)
-                            this.ui.init(newNode)
+                            this.ui.init({
+                                [UIPanelType.Block]: newNode.children[1],
+                                [UIPanelType.BanClick]: newNode.children[2],
+                                [UIPanelType.Popup]: newNode.children[3],
+                                [UIPanelType.NoBg]: newNode.children[4],
+                            })
                             prefab.decRef()
                         }
                     })
