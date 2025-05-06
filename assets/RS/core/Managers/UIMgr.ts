@@ -53,9 +53,9 @@ export class UIMgr {
             return
         }
 
-        rs.resources.load(name, Prefab, (err, prefab) => {
+        rs.resources.load(path, Prefab, (err, prefab) => {
             if (err || !prefab) {
-                warn(`[UIMgr] 加载 UI 失败：${name}`, err)
+                warn(`[UIMgr] 加载 UI 失败：${name + path}`, err)
                 return
             }
             log(`[UIMgr] 加载 UI：${name}`)

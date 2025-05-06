@@ -1,4 +1,4 @@
-import { assetManager, AssetManager, director, error, instantiate, JsonAsset, log, Prefab, warn } from "cc";
+import { assetManager, AssetManager, director, error, instantiate, JsonAsset, log, Node, Prefab, warn } from "cc";
 import { AppConfig, RSConfig } from "./core/constants/GameConfig";
 import { UIPanelType } from "./core/constants/SysEnums";
 import { assetMgr } from "./core/Managers/AssetMgr";
@@ -35,6 +35,8 @@ class RS {
     config = RSConfig
     /**是否完成加载 */
     FinishLoad: boolean = false
+    /**消息通知和弹窗画布 */
+    noticeCanvas: Node = null
 
     constructor() {
     }
@@ -54,6 +56,7 @@ class RS {
                             let newNode = instantiate(prefab)
                             newNode.parent = director.getScene()
                             director.addPersistRootNode(newNode)
+                            this.noticeCanvas = newNode
                             this.ui.init({
                                 [UIPanelType.Block]: newNode.children[1],
                                 [UIPanelType.BanClick]: newNode.children[2],

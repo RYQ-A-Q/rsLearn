@@ -1,4 +1,4 @@
-import { _decorator, CCBoolean, Component, director, Event, Node, UITransform } from 'cc';
+import { _decorator, CCBoolean, Component, Event, Node, UITransform } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopupWindows')
@@ -11,7 +11,7 @@ export class PopupWindows extends Component {
     private autoSize: boolean = true
     onEnable(): void {
         if ((this.closeChild || this.banClick) && this.autoSize) {
-            let NoticeCanvas = director.getScene().getChildByName("NoticeCanvas")
+            let NoticeCanvas = rs.noticeCanvas
             this.node.getComponent(UITransform).width = NoticeCanvas.getComponent(UITransform).width
             this.node.getComponent(UITransform).height = NoticeCanvas.getComponent(UITransform).height
             NoticeCanvas.insertChild(this.node, NoticeCanvas.children.length - 1)
