@@ -42,6 +42,7 @@ class RS {
     }
     /**启动初始化 */
     async loader() {
+        if (this.FinishLoad) { return }
         await new Promise<void>((resolve, reject) => {
             assetManager.loadBundle(this.config.bundleName.rs, (err, bd) => {
                 if (err) {

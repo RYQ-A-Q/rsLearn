@@ -83,7 +83,6 @@ export class FuncGroup extends Component {
         this.isDragging = false
     }
 
-
     /**取消拖动节点 */
     private unRegisterDragNode() {
         this.testNode.off(Node.EventType.TOUCH_START, this.dragNode_start, this)
