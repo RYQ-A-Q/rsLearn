@@ -5,7 +5,7 @@
 
 - 普通确认弹窗
 
-![image](https://github.com/RYQ-A-Q/rsLearn/raw/master/uiScene.jpg)
+![image](https://github.com/RYQ-A-Q/rsLearn/raw/master/img/uiScene.jpg)
 
 ## 功能测试场景
 - 虚拟列表
@@ -18,6 +18,6 @@
 
 - 随机分散算法
 
-![image](https://github.com/RYQ-A-Q/rsLearn/raw/master/funScene.jpg.jpg)
+![image](https://github.com/RYQ-A-Q/rsLearn/raw/master/img/funScene.jpg)
 
   
