@@ -1,4 +1,5 @@
 import { _decorator, Camera, Component, EventTouch, Input, input, instantiate, Label, Node, Prefab, UITransform, Vec2, Vec3, warn } from 'cc';
+import { UIController } from '../../src/Controller/UiController';
 const { ccclass, property } = _decorator;
 
 @ccclass('FuncGroup')
@@ -15,6 +16,11 @@ export class FuncGroup extends Component {
     testNode: Node
     @property([Node])
     dragTestNodeList: Node[] = []
+    @property(Node)
+    emptyNode: Node
+    @property({ type: Prefab, displayName: "跟随旋转节点预制体" })
+    followRotateNode: Prefab
+    curFollowRotateNode: Node = null
 
     ///临时变量区
     private testNodeParentUIT: UITransform
@@ -91,6 +97,41 @@ export class FuncGroup extends Component {
         this.testNode.off(Node.EventType.TOUCH_CANCEL, this.dragNode_end, this)
         this.testNode.setPosition(300, 500)
     }
+    /**跟随转向 */
+    private followRotate(e: EventTouch) {
+        let node = e.target as Node
+        if (this.curFollowRotateNode == null) {
+            this.curFollowRotateNode = instantiate(this.followRotateNode)
+            this.emptyNode.addChild(this.curFollowRotateNode)
+        }
+        let childLabel = node.children[0].getComponent(Label)
+        if (childLabel) {
+            if (childLabel.string != "跟随转向" && childLabel.string != "取消跟随转向") {
+                childLabel.string = "取消跟随转向"
+            }
+            if (childLabel.string == "跟随转向") {
+                childLabel.string = "取消跟随转向"
+                this.emptyNode.on(Input.EventType.TOUCH_MOVE, this.onFollowTouchMove, this)
+                this.curFollowRotateNode.active = true
+            } else {
+                childLabel.string = "跟随转向"
+                this.emptyNode.off(Input.EventType.TOUCH_MOVE, this.onFollowTouchMove, this)
+                this.curFollowRotateNode.active = false
+            }
+        }
+    }
+    private onFollowTouchMove = (e: EventTouch) => {
+        const touchPos = this.emptyNode.getComponent(UITransform).convertToNodeSpaceAR(e.getUILocation().toVec3())
+        const direction = new Vec3(
+            touchPos.x - this.curFollowRotateNode.x,
+            touchPos.y - this.curFollowRotateNode.y,
+            0
+        )
+        const angle = Math.atan2(direction.y, direction.x) * (180 / Math.PI) - 90//2D场景补正？-90
+        this.noticeLabeL.string = `起点${this.curFollowRotateNode.position}触摸位置${touchPos},旋转角度为${angle}`
+        this.curFollowRotateNode.angle = angle
+    }
+
 
 }
 
