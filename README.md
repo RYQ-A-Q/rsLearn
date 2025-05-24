@@ -16,6 +16,6 @@
 
 - 节点跟随触摸位置转向
 
-![image](https://github.com/RYQ-A-Q/rsLearn/raw/master/img/funScene.jpg.jpg)
+![image](https://github.com/RYQ-A-Q/rsLearn/raw/master/img/funScene.jpg)
 
   
