@@ -1,5 +1,6 @@
 import { _decorator, Camera, Component, EventTouch, Input, input, instantiate, Label, Node, Prefab, UITransform, Vec2, Vec3, warn } from 'cc';
 import { UIController } from '../../src/Controller/UiController';
+import { Arithmetic } from './Arithmetic';
 const { ccclass, property } = _decorator;
 
 @ccclass('FuncGroup')
@@ -131,7 +132,18 @@ export class FuncGroup extends Component {
         this.noticeLabeL.string = `起点${this.curFollowRotateNode.position}触摸位置${touchPos},旋转角度为${angle}`
         this.curFollowRotateNode.angle = angle
     }
-
+    private randonMapPoints() {
+         let path = 'prefab/ui/base/mapRandomPoints'
+        rs.resources.load(path, Prefab, (err, prefab) => {
+            let node = instantiate(prefab)
+            if (err || !prefab) {
+                warn(`[FuncGroup] 加载虚拟列表失败：${path}`, err)
+                return
+            }
+            this.emptyNode.addChild(node)
+            node.active = true
+        })
+    }
 
 }
 

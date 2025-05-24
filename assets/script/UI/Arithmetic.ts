@@ -112,4 +112,52 @@ export class Arithmetic {
         console.log(`线性查找 ${target}:`, this.linearSearch(original, target));
         console.log(`二分查找 ${target}（排序后）:`, this.binarySearch(sorted, target));
     }
+static generateRandomPositions(m: number, n: number, count: number, minDistance: number = 2): number[][] {
+    const distance = (a: number[], b: number[]): number => {
+        return Math.sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2);
+    };
+
+    // 所有格子坐标
+    const allGrid: number[][] = [];
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            allGrid.push([i, j]);
+        }
+    }
+
+    const maxAttempt = 20; // 最大尝试次数（避免死循环）
+    let currentMinDistance = minDistance;
+    let attempt = 0;
+
+    while (attempt < maxAttempt && currentMinDistance >= 0) {
+        attempt++;
+
+        // 打乱坐标顺序，提升分布均匀性
+        const shuffled = [...allGrid];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+
+        const result: number[][] = [];
+
+        for (const pos of shuffled) {
+            const valid = result.every(p => distance(p, pos) >= currentMinDistance);
+            if (valid) {
+                result.push(pos);
+                if (result.length >= count) {
+                    return result;
+                }
+            }
+        }
+
+        // 没放满，尝试降低 minDistance
+        currentMinDistance = Math.max(0, currentMinDistance - 0.5);
+    }
+
+    console.warn(`⚠️ 最终仅生成了 ${Math.min(count, allGrid.length)} 个点，期望 ${count}，降至最小 minDistance=${currentMinDistance}`);
+    return allGrid.slice(0, Math.min(count, allGrid.length));
+}
+
+
 }

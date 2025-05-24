@@ -16,6 +16,8 @@
 
 - 节点跟随触摸位置转向
 
+- 随机分散算法
+
 ![image](https://github.com/RYQ-A-Q/rsLearn/raw/master/funScene.jpg.jpg)
 
   
