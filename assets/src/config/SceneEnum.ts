@@ -2,7 +2,7 @@ import { Enum } from "cc";
 
 export enum SceneEnum {
     start = "start",
-    btnScene = "btnScene",
+    uiScene = "uiScene",
     funcScene = "funcScene"
 }
 Enum(SceneEnum)
