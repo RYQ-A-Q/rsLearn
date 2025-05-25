@@ -20,6 +20,8 @@
 
 - 手写绘制
 
+- 简单a*寻路算法
+
 ![image](img/funScene.jpg)
 
   

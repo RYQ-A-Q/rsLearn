@@ -133,7 +133,7 @@ export class FuncGroup extends Component {
         this.curFollowRotateNode.angle = angle
     }
     private randonMapPoints() {
-         let path = 'prefab/ui/func/mapRandomPoints'
+        let path = 'prefab/ui/func/mapRandomPoints'
         rs.resources.load(path, Prefab, (err, prefab) => {
             let node = instantiate(prefab)
             if (err || !prefab) {
@@ -145,7 +145,19 @@ export class FuncGroup extends Component {
         })
     }
     private graphicFunc() {
-         let path = 'prefab/ui/func/graphicFunc'
+        let path = 'prefab/ui/func/graphicFunc'
+        rs.resources.load(path, Prefab, (err, prefab) => {
+            let node = instantiate(prefab)
+            if (err || !prefab) {
+                warn(`[FuncGroup] 加载虚拟列表失败：${path}`, err)
+                return
+            }
+            this.emptyNode.addChild(node)
+            node.active = true
+        })
+    }
+    private mapPanel() {
+        let path = 'prefab/ui/func/mapPanel'
         rs.resources.load(path, Prefab, (err, prefab) => {
             let node = instantiate(prefab)
             if (err || !prefab) {
