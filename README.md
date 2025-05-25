@@ -18,6 +18,8 @@
 
 - 随机分散算法
 
+- 手写绘制
+
 ![image](img/funScene.jpg)
 
   
