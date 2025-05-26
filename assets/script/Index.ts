@@ -5,6 +5,7 @@ const { ccclass, property } = _decorator;
 export class Index extends Component {
     start() {
         if (!rs.FinishLoad) {
+            console.log('加载框架中')
             rs.loader()
         }
     }
