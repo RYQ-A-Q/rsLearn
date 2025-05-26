@@ -24,4 +24,7 @@
 
 ![image](img/funScene.jpg)
 
-  
+## 游戏场景
+- 简单迷宫 
+
+![image](img/gameScene.jpg)

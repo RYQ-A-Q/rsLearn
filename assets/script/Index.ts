@@ -4,7 +4,9 @@ const { ccclass, property } = _decorator;
 @ccclass('Index')
 export class Index extends Component {
     start() {
-        rs.loader()
+        if (!rs.FinishLoad) {
+            rs.loader()
+        }
     }
 }
 

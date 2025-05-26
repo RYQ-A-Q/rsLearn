@@ -69,7 +69,7 @@
       "z": 1
     },
     "_mobility": 0,
-    "_layer": 33554432,
+    "_layer": 1073741824,
     "_euler": {
       "__type__": "cc.Vec3",
       "x": 0,
@@ -81,7 +81,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Camera",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
       "__id__": 1
@@ -116,7 +116,7 @@
       "z": 1
     },
     "_mobility": 0,
-    "_layer": 33554432,
+    "_layer": 1073741824,
     "_euler": {
       "__type__": "cc.Vec3",
       "x": 0,
@@ -138,7 +138,7 @@
       "__id__": 4
     },
     "_projection": 0,
-    "_priority": 0,
+    "_priority": 10,
     "_fov": 45,
     "_fovAxis": 0,
     "_orthoHeight": 640,
@@ -165,7 +165,7 @@
     "_shutter": 7,
     "_iso": 0,
     "_screenScale": 1,
-    "_visibility": 34603008,
+    "_visibility": 33554432,
     "_targetTexture": null,
     "_postProcess": null,
     "_usePostProcess": false,
