@@ -27,8 +27,8 @@ export class MapRandomPoints extends Component {
         console.log(randomPositions);
         randomPositions.forEach((pos, index) => {
             this.pointList[index].setPosition(
-                -200 + pos[0] * 50,//置左+位移
-                -200 + pos[1] * 50, 0)//置下+位移
+                -200 + pos[1] * 50,//置左+位移
+                200 - pos[0] * 50, 0)//置下+位移
             this.pointList[index].active = true
             this.pointList[index].children[0].getComponent(Label).string = index + 1 + ""
         });
