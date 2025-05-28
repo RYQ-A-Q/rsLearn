@@ -1,4 +1,5 @@
 # 用于一些cocos功能测试和开发
+![image](img/startScene.jpg)
 
 ## UI生成场景
 - 普通消息通知
@@ -28,3 +29,9 @@
 - 简单迷宫 
 
 ![image](img/gameScene.jpg)
+
+
+## 设计模式
+- 命令模式
+
+![image](img/designModeScene.jpg)

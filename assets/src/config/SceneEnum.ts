@@ -4,6 +4,7 @@ export enum SceneEnum {
     start = "start",
     uiScene = "uiScene",
     funcScene = "funcScene",
-    gameScene = "gameScene"
+    gameScene = "gameScene",
+    designModeScene = "designModeScene"
 }
 Enum(SceneEnum)

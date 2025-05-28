@@ -36,7 +36,6 @@ export class UIMgr {
         }
         const cacheKey = name || path
         if (rs.pools.has(cacheKey)) {//优先考虑对象池
-            log("[UIMgr] 获取对象池对象：" + cacheKey)
             let node = rs.pools.get(cacheKey)
             node.active = true
             this._panelRoots[type].addChild(node)
@@ -58,7 +57,6 @@ export class UIMgr {
                 warn(`[UIMgr] 加载 UI 失败：${name + path}`, err)
                 return
             }
-            log(`[UIMgr] 加载 UI：${name}`)
             const node = instantiate(prefab)
             this._panelRoots[type].addChild(node)
             node.active = true
