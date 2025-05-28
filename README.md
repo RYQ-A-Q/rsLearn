@@ -34,4 +34,5 @@
 ## 设计模式
 - 命令模式
 
+### 设计模式笔记在[这里](summary/designMode/README.md)
 ![image](img/designModeScene.jpg)
