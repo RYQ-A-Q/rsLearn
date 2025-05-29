@@ -7,6 +7,7 @@ export class Draggable extends Component {
     private isDragging: boolean = false;
 
     onLoad() {
+
         this.uiTransform = this.node.parent.getComponent(UITransform);
         this.registerDragEvents();
     }
@@ -28,6 +29,7 @@ export class Draggable extends Component {
         const touchPos = e.getUILocation().toVec3();
         const localPos = this.uiTransform.convertToNodeSpaceAR(touchPos);
         this.node.setPosition(localPos);
+        rs.event.category("BackpackHero").emit("playerMove",e)
     }
 
     private onTouchEnd(e: EventTouch) {

@@ -10,12 +10,18 @@ export class BackpackHero extends Component {
     private backpackItems: UITransform[] = [];
     @property(UITransform)
     private curTouchUIT: UITransform = null;
+    protected onLoad(): void {
+        let e = rs.event.category("BackpackHero")
+        e.on("playerMove", this.checkCollision, this)
+    }
+    protected onDestroy(): void {
+        rs.event.category("BackpackHero").off("playerMove", this.checkCollision, this)
+    }
     start() {
 
     }
 
     update(deltaTime: number) {
-        this.checkCollision()
 
     }
     /**检查碰撞 */
@@ -23,7 +29,7 @@ export class BackpackHero extends Component {
         if (!this.curTouchUIT) { return; }
         this.backpackItems.forEach(item => {
             if (item.getBoundingBoxToWorld().intersects(this.curTouchUIT.getBoundingBoxToWorld())) {
-                console.log(item.name + "碰撞");
+                console.log(item.node.name + "碰撞");
                 item.getComponent(Sprite).color = new Color("#AAF1A4AF")
             } else {
                 item.getComponent(Sprite).color = new Color("#FFFFFFAF")

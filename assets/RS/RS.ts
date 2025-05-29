@@ -9,6 +9,7 @@ import { netMgr } from "./core/Managers/NetMgr";
 import { poolsMgr } from "./core/Managers/PoolsMgr";
 import { sceneMgr } from "./core/Managers/SceneMgr";
 import { uiMgr } from "./core/Managers/UIMgr";
+import { eventMgr } from "./core/Managers/EventMgr";
 
 /**框架类 */
 class RS {
@@ -18,7 +19,10 @@ class RS {
     public enum = enumMgr
     /**资源管理器 */
     public asset = assetMgr
+    /**UI管理器 */
     public ui = uiMgr
+    /**事件管理器理器 */
+    public event = eventMgr
     /**对象池管理器 */
     public pools = poolsMgr
     /**分包管理器 */
