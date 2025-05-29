@@ -39,6 +39,9 @@ export class GamePanel extends Component {
     private openMaze() {
         this.openGame("prefab/ui/game/Maze")
     }
+    private openBackpackHero(){
+        this.openGame("prefab/ui/game/BackpackHero")
+    }
     private changeSelfState(e: Node) {
         if (e == null) {
             this.node.active = false
