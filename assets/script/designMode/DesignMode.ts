@@ -26,6 +26,9 @@ export class DesignMode extends Component {
     private openCommandPattern() {
         this.openGame("prefab/ui/designMode/commandPattern")
     }
+    private openObserverPattern() {
+        this.openGame("prefab/ui/designMode/observerPattern")
+    }
 }
 
 
