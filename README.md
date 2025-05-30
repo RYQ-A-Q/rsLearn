@@ -34,5 +34,7 @@
 ## 设计模式
 - 命令模式
 
+- 观察者模式
+
 ### 设计模式笔记在[这里](https://github.com/RYQ-A-Q/rs-DP)
 ![image](img/designModeScene.jpg)
