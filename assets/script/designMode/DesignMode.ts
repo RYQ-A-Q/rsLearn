@@ -23,11 +23,14 @@ export class DesignMode extends Component {
             gameNode.active = true
         })
     }
-    private openCommandPattern() {
+    private openCommandPattern() {// 命令模式
         this.openGame("prefab/ui/designMode/commandPattern")
     }
-    private openObserverPattern() {
+    private openObserverPattern() {//观察者模式
         this.openGame("prefab/ui/designMode/observerPattern")
+    }
+    private openSingletonPattern() {//单例模式
+        this.openGame("prefab/ui/designMode/singletonPattern")
     }
 }
 

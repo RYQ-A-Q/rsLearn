@@ -16,10 +16,10 @@ class AssetMgr {
      * @returns Promise<Asset>
      */
     public async load<T extends Asset>(
-        bundleName: string = "RS_res",
         path: string,
         type: new () => T,
-        onProgress?: (progress: number) => void
+        onProgress?: (progress: number) => void,
+        bundleName: string = "RS_res",
     ): Promise<T> {
         // 如果资源已缓存，直接返回
         if (this.cache.has(path)) {
@@ -78,10 +78,11 @@ class AssetMgr {
 
         for (const asset of assets) {
             try {
-                const result = await this.load(bundleName, asset.path, asset.type, updateProgress);
+                const result = await this.load(asset.path, asset.type, updateProgress);
                 results.push(result);
                 loaded++;
                 updateProgress();
+                bundleName
             } catch (error) {
                 console.error(`资源加载失败: ${asset.path}`, error);
             }
