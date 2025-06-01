@@ -3380,8 +3380,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -48.757,
-      "y": 12.696,
+      "x": 264.158,
+      "y": 261.635,
       "z": 0
     },
     "_lrot": {
@@ -3511,6 +3511,8 @@
       "__id__": 0
     },
     "fileId": "dcoreDKkVNJKWDdx55U1jv",
+    "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -3905,6 +3907,8 @@
       "__id__": 0
     },
     "fileId": "79hpaZdExGmautylIxrrUo",
+    "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -3997,9 +4001,7 @@
         "__id__": 108
       }
     ],
-    "curTouchUIT": {
-      "__id__": 122
-    },
+    "curTouchUIT": null,
     "_id": ""
   },
   {

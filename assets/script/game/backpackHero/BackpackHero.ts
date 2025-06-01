@@ -1,129 +1,213 @@
-import { Sprite } from 'cc';
-import { Color } from 'cc';
-import { UITransform } from 'cc';
-import { _decorator, Component, Node } from 'cc';
-import { EventTouch } from 'cc';
+import { _decorator, Component, UITransform, Sprite, Color, EventTouch } from 'cc';
 import { Draggable, GoodsItem } from './Draggable';
+import { Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('BackpackHero')
 export class BackpackHero extends Component {
-    private grid: number[][] = Array.from({ length: 4 }, () => Array(4).fill(0))
+    private grid: number[][] = Array.from({ length: 4 }, () => Array(4).fill(0));
+
     @property([UITransform])
     private backpackItems: UITransform[] = [];
+
+    private backpackArray: UITransform[][] = Array.from({ length: 4 }, () => Array(4).fill(null));
+
     @property(UITransform)
     private curTouchUIT: UITransform = null;
+
     private curTouchGoodsItem: GoodsItem = null;
+    private curDraggable: Draggable = null;
+    private lastValidPos: { x: number, y: number } = null;
+
     protected onLoad(): void {
-        let e = rs.event.category("BackpackHero")
-        e.on("playerMove", this.checkCollision, this)
-        e.on("placeItem", this.tryPlaceItem, this)
+        let e = rs.event.category("BackpackHero");
+        e.on("playerMove", this.checkCollision, this);
+        e.on("placeItem", this.tryPlaceItem, this);
     }
+
     protected onDestroy(): void {
-        rs.event.category("BackpackHero").off("playerMove", this.checkCollision, this)
+        let e = rs.event.category("BackpackHero");
+        e.off("playerMove", this.checkCollision, this);
+        e.off("placeItem", this.tryPlaceItem, this);
     }
+
     start() {
-
+        this.init();
     }
 
-    update(deltaTime: number) {
-
+    init() {
+        this.grid.forEach((item, i) => {
+            item.forEach((_, j) => {
+                this.backpackArray[i][j] = this.backpackItems[i * this.grid.length + j];
+            });
+        });
+        this.updateGridColors();
     }
+
+    private updateGridColors() {
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
+                const sprite = this.backpackArray[i][j].node.getComponent(Sprite);
+                sprite.color = this.grid[i][j] === 0 ? Color.WHITE : new Color(150, 200, 255); // 浅蓝色
+            }
+        }
+    }
+
     private checkCollision(e: EventTouch) {
+        console.log(`当前触摸` + e.target.name)
         this.curTouchUIT = e.target.getComponent(UITransform);
         const draggable = this.curTouchUIT?.node.getComponent(Draggable);
         if (!this.curTouchUIT || !draggable) return;
 
         this.curTouchGoodsItem = draggable.goodsItem;
-        const type = draggable['type'];
-        const gridShape = this.curTouchGoodsItem.grid;
-        const rows = gridShape.length;
-        const cols = gridShape[0].length;
+        this.curDraggable = draggable;
 
-        // 找到第一个碰撞的 backpackItem 的位置
-        for (let i = 0; i < this.backpackItems.length; i++) {
-            const item = this.backpackItems[i];
-            if (item.getBoundingBoxToWorld().intersects(this.curTouchUIT.getBoundingBoxToWorld())) {
-                const startRow = Math.floor(i / 4);
-                const startCol = i % 4;
+        let found = false;
+        for (let row = 0; row < 4; row++) {
+            for (let col = 0; col < 4; col++) {
+                const targetTransform = this.backpackArray[row][col];
+                if (this.curTouchUIT.getBoundingBoxToWorld().intersects(targetTransform.getBoundingBoxToWorld())) {
+                    console.log("碰撞到" + targetTransform.node.name + "," + row + "," + col)
+                    this.lastValidPos = { x: row, y: col };
+                    this.showCollisionPreview(row, col);
+                    found = true;
+                    break;
+                }
+            }
+            if (found) break;
+        }
+    }
 
-                // 先全部重置颜色
-                this.backpackItems.forEach(ui => ui.getComponent(Sprite).color = new Color("#FFFFFFAF"));
+    private showCollisionPreview(startRow: number, startCol: number) {
+        const shape = this.curTouchGoodsItem.grid;
+        const rows = shape.length;
+        const cols = shape[0].length;
+        let canPlace = true;
 
-                // 检查每一个相对格子
-                for (let r = 0; r < rows; r++) {
-                    for (let c = 0; c < cols; c++) {
-                        if (gridShape[r][c] === 1) {
-                            const gridR = startRow + r;
-                            const gridC = startCol + c;
-                            if (gridR < 4 && gridC < 4) {
-                                const gridVal = this.grid[gridR][gridC];
-                                const index = gridR * 4 + gridC;
-                                const uiItem = this.backpackItems[index];
-                                if (gridVal === 0 || gridVal === type) {
-                                    uiItem.getComponent(Sprite).color = new Color("#AAF1A4AF"); // 绿色
-                                } else {
-                                    uiItem.getComponent(Sprite).color = new Color("#F88F8FAF"); // 红色
-                                }
-                            }
-                        }
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+                const gridVal = shape[i][j];
+                const r = startRow + i;
+                const c = startCol + j;
+
+                if (gridVal === 1) {
+                    if (r >= 4 || c >= 4 || this.grid[r][c] !== 0) {
+                        canPlace = false;
                     }
                 }
-                break;
+            }
+        }
+
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
+                const sprite = this.backpackArray[i][j].node.getComponent(Sprite);
+                if (this.grid[i][j] !== 0) {
+                    sprite.color = new Color(150, 200, 255); // 浅蓝
+                } else {
+                    sprite.color = Color.WHITE;
+                }
+            }
+        }
+
+        for (let i = 0; i < shape.length; i++) {
+            for (let j = 0; j < shape[i].length; j++) {
+                const gridVal = shape[i][j];
+                const r = startRow + i;
+                const c = startCol + j;
+
+                if (gridVal === 1 && r < 4 && c < 4) {
+                    const sprite = this.backpackArray[r][c].node.getComponent(Sprite);
+                    sprite.color = canPlace ? new Color(150, 255, 150) : new Color(255, 150, 150); // 绿或红
+                }
             }
         }
     }
 
     private tryPlaceItem(draggable: Draggable) {
+        if (!draggable) return;
+
+        // 1️⃣ 清除旧占位（无论成不成功都要清）
+        this.clearPreviousPlacement(draggable);
+
+        // 🟥 没有有效放置点，回退
+        if (!this.lastValidPos) {
+            draggable.resetPosition();
+            return;
+        }
+
+        const shape = draggable.goodsItem.grid;
         const type = draggable.type;
-        const gridShape = draggable.goodsItem.grid;
-        const rows = gridShape.length;
-        const cols = gridShape[0].length;
+        const rows = shape.length;
+        const cols = shape[0].length;
+        const { x: startRow, y: startCol } = this.lastValidPos;
+        let canPlace = true;
 
-        for (let i = 0; i < this.backpackItems.length; i++) {
-            const item = this.backpackItems[i];
-            if (item.getBoundingBoxToWorld().intersects(this.curTouchUIT.getBoundingBoxToWorld())) {
-                const startRow = Math.floor(i / 4);
-                const startCol = i % 4;
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+                const gridVal = shape[i][j];
+                const r = startRow + i;
+                const c = startCol + j;
 
-                let canPlace = true;
-
-                // 检查是否合法
-                for (let r = 0; r < rows; r++) {
-                    for (let c = 0; c < cols; c++) {
-                        if (gridShape[r][c] === 1) {
-                            const gridR = startRow + r;
-                            const gridC = startCol + c;
-                            if (gridR >= 4 || gridC >= 4 || this.grid[gridR][gridC] !== 0) {
-                                canPlace = false;
-                                break;
-                            }
-                        }
+                if (gridVal === 1) {
+                    if (r >= 4 || c >= 4 || this.grid[r][c] !== 0) {
+                        canPlace = false;
                     }
-                    if (!canPlace) break;
                 }
+            }
+        }
 
-                // 放置
-                if (canPlace) {
-                    for (let r = 0; r < rows; r++) {
-                        for (let c = 0; c < cols; c++) {
-                            if (gridShape[r][c] === 1) {
-                                const gridR = startRow + r;
-                                const gridC = startCol + c;
-                                this.grid[gridR][gridC] = type;
-                                const index = gridR * 4 + gridC;
-                                this.backpackItems[index].getComponent(Sprite).color = new Color("#AADDFFFF"); // 浅蓝
-                            }
-                        }
+        if (canPlace) {
+            // ✅ 设置新占位信息
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < cols; j++) {
+                    const gridVal = shape[i][j];
+                    const r = startRow + i;
+                    const c = startCol + j;
+                    if (gridVal === 1) {
+                        this.grid[r][c] = type;
                     }
-                    console.log("放置成功，当前grid：", JSON.stringify(this.grid));
                 }
+            }
 
-                break;
+            // ✅ 设置节点位置使其居中放置
+            const centerPos = this.getCenterWorldPos(startRow, startCol, shape);
+            draggable.node.setWorldPosition(centerPos);
+        } else {
+            // ❌ 无法放置，回退
+            draggable.resetPosition();
+        }
+
+        // 🔁 统一刷新
+        this.updateGridColors();
+        this.lastValidPos = null;
+    }
+    private clearPreviousPlacement(draggable: Draggable) {
+        const shape = draggable.goodsItem.grid;
+        const type = draggable.type;
+
+        for (let row = 0; row < 4; row++) {
+            for (let col = 0; col < 4; col++) {
+                if (this.grid[row][col] === type) {
+                    // 检查该处是否可能属于当前拖动物品
+                    // 防止误清除同类型其他物品（可扩展添加唯一 ID 解决）
+                    this.grid[row][col] = 0;
+                }
             }
         }
     }
+    private getCenterWorldPos(startRow: number, startCol: number, shape: number[][]): Vec3 {
+        const rows = shape.length;
+        const cols = shape[0].length;
+
+        // 计算格子中心的 worldPosition（以左上角为起点）
+        const centerRow = startRow + rows / 2;
+        const centerCol = startCol + cols / 2;
+
+        // 格子对象
+        const gridTransform = this.backpackArray[Math.floor(centerRow)][Math.floor(centerCol)];
+
+        // 获取该格子在世界空间的中心位置
+        return gridTransform.node.getWorldPosition();
+    }
 
 }
-
-
