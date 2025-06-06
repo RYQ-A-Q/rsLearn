@@ -10,6 +10,7 @@ import { poolsMgr } from "./core/Managers/PoolsMgr";
 import { sceneMgr } from "./core/Managers/SceneMgr";
 import { uiMgr } from "./core/Managers/UIMgr";
 import { eventMgr } from "./core/Managers/EventMgr";
+import { storageMgr } from "./core/Managers/StorageMgr";
 
 /**框架类 */
 class RS {
@@ -29,6 +30,8 @@ class RS {
     public bundle = bundleMgr
     /**场景管理器 */
     public scene = sceneMgr
+    /**本地存储管理器 */
+    public storage = storageMgr
     /**网络管理器 */
     public net = netMgr
     /**框架默认分包 */
