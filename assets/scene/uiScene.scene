@@ -11,7 +11,7 @@
   },
   {
     "__type__": "cc.Scene",
-    "_name": "btnScene",
+    "_name": "uiScene",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -736,7 +736,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 198,
+      "y": 262,
       "z": 0
     },
     "_lrot": {
@@ -1238,7 +1238,7 @@
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 0.15,
+    "_top": 0.1,
     "_bottom": 0,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
