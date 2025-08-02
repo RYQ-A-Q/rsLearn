@@ -1,0 +1,220 @@
+{
+    "code": 200,
+    "message": "success",
+    "data": {
+        "focus_id": 29,
+        "degree": 1,
+        "hour": 35,
+        "result": {
+            "data": [
+                {
+                    "type": "fast",
+                    "times": 2,
+                    "value": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "type": "fast",
+                    "times": 3,
+                    "value": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "type": "fast",
+                    "times": 4,
+                    "value": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "type": "fast",
+                    "times": 5,
+                    "value": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "type": "fast",
+                    "times": 6,
+                    "value": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "type": "fast",
+                    "times": 7,
+                    "value": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "type": "fast",
+                    "times": 8,
+                    "value": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                {
+                    "type": "fast",
+                    "times": 9,
+                    "value": [
+                        1,
+                        -1,
+                        1
+                    ]
+                },
+                {
+                    "type": "fast",
+                    "times": 10,
+                    "value": [
+                        1,
+                        -1,
+                        1
+                    ]
+                },
+                {
+                    "type": "fast",
+                    "times": 11,
+                    "value": [
+                        -1,
+                        -1,
+                        -1
+                    ]
+                }
+            ],
+            "rank": "86%",
+            "title": "短时记忆",
+            "value": "10.33",
+            "costTime": 220,
+            "game_type": "long_term_effect",
+            "totalResult": [
+                [
+                    {
+                        "type": "fast",
+                        "value": [
+                            1,
+                            1,
+                            1
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "type": "fast",
+                        "value": [
+                            1,
+                            1,
+                            1
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "type": "fast",
+                        "value": [
+                            1,
+                            1,
+                            1
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "type": "fast",
+                        "value": [
+                            1,
+                            1,
+                            1
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "type": "fast",
+                        "value": [
+                            1,
+                            1,
+                            1
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "type": "fast",
+                        "value": [
+                            1,
+                            1,
+                            1
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "type": "fast",
+                        "value": [
+                            1,
+                            1,
+                            1
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "type": "fast",
+                        "value": [
+                            1,
+                            -1,
+                            1
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "type": "fast",
+                        "value": [
+                            1,
+                            -1,
+                            1
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "type": "fast",
+                        "value": [
+                            -1,
+                            -1,
+                            -1
+                        ]
+                    }
+                ]
+            ],
+            "progressData": {
+                "desc": null,
+                "unit": null,
+                "title": "短时记忆广度走势图",
+                "value": "10.33",
+                "x_name": "对应课时",
+                "y_name": "短时记忆广度值"
+            }
+        },
+        "report_data": null
+    },
+    "server_at": 1752067101
+}
