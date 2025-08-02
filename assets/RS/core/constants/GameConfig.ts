@@ -1,7 +1,7 @@
 
 /**应用信息 */
 export const AppConfig = {
-    appName: "漫漫又一夜",
+    appName: "rs框架",
     version: "v1.0.0"
 }
 export const RSConfig = {
