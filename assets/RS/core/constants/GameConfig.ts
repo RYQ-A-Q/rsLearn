@@ -7,18 +7,19 @@ export const AppConfig = {
 export const RSConfig = {
     /**模块bundle名配置，需和实际bundle一致 */
     bundleName: {
-        rs: "RS_res",
+        rs: "RS_sys",
         audio: "RS_media",
     },
     /**资源路径 */
     path: {
         /**音频路径指引文件 */
         audioPathConfigJSON: "data/config/audioConfig",
-        noticeCanvas: "prefab/ui/noticeCanvas"
+        /**rs画布 */
+        RS_UICanvas: "prefab/ui/RS_UICanvas"
     },
     /*对象池配置 */
     poolsConfig: {
         /**默认预制体生成大小 */
-        size: 10
+        size: 3
     }
 }

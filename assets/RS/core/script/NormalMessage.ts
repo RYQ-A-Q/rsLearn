@@ -1,10 +1,14 @@
+import { UITransform } from 'cc';
+import { RichText } from 'cc';
 import { _decorator, Component, Label, Node, Tween, tween, Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('NormalMessage')
 export class NormalMessage extends Component {
-    @property(Label)
-    private text: Label
+    @property(RichText)
+    private text: RichText
+    @property({ type: [UITransform], displayName: "0背景 1文本" })
+    private UITList: UITransform[] = []
 
     private _stayDuration: number = 1;
     private _currentTween: Tween<Node> = null;
@@ -12,12 +16,13 @@ export class NormalMessage extends Component {
     /**
      * 显示消息
      * @param message 显示内容
-     * @param duration 停留时间（秒），默认0.7
+     * @param duration 停留时间（秒），默认0.5
      */
     public show(message: string, duration: number = 0.5) {
         this.stopAni();
         this._stayDuration = duration;
         this.text.string = message;
+        this.UITList[0].setContentSize(this.UITList[1].contentSize.width * 4, this.UITList[1].contentSize.width)
         this.playShowAnim();
     }
 
@@ -40,7 +45,9 @@ export class NormalMessage extends Component {
             })
             .start();
     }
-
+    onDisable(): void {
+        this.stopAni();
+    }
     /** 中断动画 */
     private stopAni() {
         if (this._currentTween) {

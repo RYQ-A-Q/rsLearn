@@ -16,6 +16,12 @@ export class BtnGroup extends Component {
             }
         })
     }
+    private clear() {
+        rs.ui.clearAll()
+        console.log("清除")
+        UIController.normalMessage("清除")
+
+    }
 }
 
 

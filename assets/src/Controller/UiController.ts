@@ -7,8 +7,8 @@ export class UIController {
     public static instance() { return this._instance }
 
     /**普通消息通知 */
-    public static normalMessage(message: string, duration: number = 0.3) {
-        rs.ui.open("normalMessage", "prefab/ui/base/normalMessage", UIPanelType.NoBg, (node) => {
+    public static normalMessage(message: string, duration: number = 0.5) {
+        rs.ui.open("normalToast", "prefab/ui/base/normalToast", UIPanelType.toast, (node) => {
             if (node) {
                 node.getComponent(NormalMessage).show(message, duration)
             }
@@ -16,7 +16,7 @@ export class UIController {
     }
     /**普通确认面板 */
     public static verifyPanel(title: string = "", content: string = "确认吗", callback: (isConfirmed: boolean) => void = () => { }) {
-        rs.ui.open("verifyPanel", "prefab/ui/base/verifyPanel", UIPanelType.Block, (node) => {
+        rs.ui.open("normalVerifyPanel", "prefab/ui/base/normalVerifyPanel", UIPanelType.pop_touchBan, (node) => {
             if (node) {
                 node.getComponent(VerifyPanel).init(title, content, callback)
             }

@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "normalMessage",
+    "_name": "normalToast",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "normalMessage",
+    "_name": "normalToast",
     "_objFlags": 512,
     "__editorExtras__": {},
     "_parent": null,
@@ -89,7 +89,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 4.361,
+      "x": 0,
       "y": 0,
       "z": 0
     },
@@ -130,8 +130,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 720,
-      "height": 100
+      "width": 500,
+      "height": 56.7
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -161,13 +161,13 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 107,
-      "g": 107,
-      "b": 107,
-      "a": 85
+      "r": 5,
+      "g": 5,
+      "b": 5,
+      "a": 105
     },
     "_spriteFrame": {
-      "__uuid__": "bc5b4e60-3bb2-446f-870a-8cf877f7e52c@f9941",
+      "__uuid__": "11281300-0f60-47c3-bf3c-de0d0f567852@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -198,6 +198,8 @@
       "__id__": 0
     },
     "fileId": "51jgx1BudCJ6zX68aDnQY0",
+    "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -223,7 +225,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 4.36099999999999,
+      "x": 0,
       "y": 0,
       "z": 0
     },
@@ -264,8 +266,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 720,
-      "height": 59.1
+      "width": 200,
+      "height": 56.7
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -279,7 +281,7 @@
     "fileId": "e48n33RrpNFYEQBTHiS2iy"
   },
   {
-    "__type__": "cc.Label",
+    "__type__": "cc.RichText",
     "_name": "",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -290,61 +292,31 @@
     "__prefab": {
       "__id__": 12
     },
-    "_customMaterial": null,
-    "_srcBlendFactor": 2,
-    "_dstBlendFactor": 4,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_string": "Hi！",
+    "_lineHeight": 45,
+    "_string": "这不对吧？",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 45,
-    "_fontSize": 45,
-    "_fontFamily": "Arial",
-    "_lineHeight": 45,
-    "_overflow": 3,
-    "_enableWrapText": true,
-    "_font": null,
-    "_isSystemFontUsed": true,
-    "_spacingX": 0,
-    "_isItalic": false,
-    "_isBold": true,
-    "_isUnderline": false,
-    "_underlineHeight": 2,
-    "_cacheMode": 1,
-    "_enableOutline": true,
-    "_outlineColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_outlineWidth": 1.2,
-    "_enableShadow": false,
-    "_shadowColor": {
+    "_fontSize": 40,
+    "_fontColor": {
       "__type__": "cc.Color",
       "r": 255,
       "g": 255,
       "b": 255,
       "a": 255
     },
-    "_shadowOffset": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_shadowBlur": 2,
+    "_maxWidth": 0,
+    "_fontFamily": "Arial",
+    "_font": null,
+    "_isSystemFontUsed": true,
+    "_userDefinedFont": null,
+    "_cacheMode": 0,
+    "_imageAtlas": null,
+    "_handleTouchEvent": true,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "16a+cLU0dDBLp+u5NPPxC9"
+    "fileId": "87+qnKHS1Nm46roB/pNA90"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -355,6 +327,8 @@
       "__id__": 0
     },
     "fileId": "56r91xKwlJx5nsj1n42+7C",
+    "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -371,8 +345,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 650,
-      "height": 100
+      "width": 500,
+      "height": 80
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -400,6 +374,14 @@
     "text": {
       "__id__": 11
     },
+    "UITList": [
+      {
+        "__id__": 3
+      },
+      {
+        "__id__": 9
+      }
+    ],
     "_id": ""
   },
   {
@@ -415,6 +397,7 @@
       "__id__": 0
     },
     "fileId": "1cfVwPQutFnYhdNGIKIioS",
-    "instance": null
+    "instance": null,
+    "targetOverrides": null
   }
 ]

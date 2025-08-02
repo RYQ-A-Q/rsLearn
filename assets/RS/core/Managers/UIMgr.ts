@@ -1,5 +1,6 @@
 import { Node, Prefab, instantiate, log, warn } from 'cc';
 import { UIPanelType } from '../constants/SysEnums';
+import { assetManager } from 'cc';
 
 type UIMap = { [key: string]: Node }
 
@@ -29,26 +30,28 @@ export class UIMgr {
      * @param type 挂载容器类型
      * @param callback 加载完成回调，返回目标节点
      */
-    public open(name: string, path: string, type: UIPanelType = UIPanelType.Popup, callback?: (node: Node) => void): void {
+    public open(name: string, path: string, type: UIPanelType = UIPanelType.toast, callback?: (node: Node) => void): void {
         if (!this._panelRoots[type]) {
             warn(`[UIMgr] 未找到指定的挂载容器：${type}`)
             return
         }
-        const cacheKey = name || path
+        const cacheKey = name
         if (rs.pools.has(cacheKey)) {//优先考虑对象池
             let node = rs.pools.get(cacheKey)
             node.active = true
             this._panelRoots[type].addChild(node)
             this._panelRoots[type].active = true
             callback?.(node)
+            console.log("对象池长度" + rs.pools.poolLength(cacheKey))
             return
         }
 
-        if (this._uiCache[cacheKey] && !this._uiCache[cacheKey].active) {//已经存在并且是不激活状态
+        if (this._uiCache[cacheKey] && (!this._uiCache[cacheKey].active || this._uiCache[cacheKey].parent == null)) {//已经存在并且是不激活状态
             this._uiCache[cacheKey].active = true
             this._panelRoots[type].addChild(this._uiCache[cacheKey])
             this._panelRoots[type].active = true
             callback?.(this._uiCache[cacheKey])
+            console.log("用旧的")
             return
         }
 
@@ -62,6 +65,7 @@ export class UIMgr {
             node.active = true
             this._panelRoots[type].active = true
             this._uiCache[cacheKey] = node
+            prefab.decRef()//保证没有资源引用
             callback?.(node)
         })
     }

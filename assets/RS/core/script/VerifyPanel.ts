@@ -67,7 +67,7 @@ export class VerifyPanel extends Component {
     }
 
     private closePanel() {
-        this.node.active = false
+        this.node.removeFromParent()
         if (this.currentTween) {
             this.currentTween.stop()
             this.currentTween = null

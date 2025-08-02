@@ -30,7 +30,7 @@ class EnumMgr {
 
     /**系统预制体路径枚举,在rs加载时会创建对应对象池 */
     public readonly FileName_prefabSys = {
-        normalMessage: "prefab/ui/base/normalMessage"
+        normalToast: "prefab/ui/base/normalToast"
     }
 }
 export const enumMgr = new EnumMgr();

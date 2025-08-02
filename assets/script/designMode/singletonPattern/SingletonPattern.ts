@@ -27,7 +27,7 @@ class musicMgr_lazy {
 class musicMgr_eager {
     private static instance: musicMgr_eager = new musicMgr_eager();
     private constructor() {
-        console.log("musicMgr_eager创建实例");
+        // console.log("musicMgr_eager创建实例");
         this.music = new AudioSource();
     }
     private music: AudioSource

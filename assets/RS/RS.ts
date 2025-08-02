@@ -11,6 +11,7 @@ import { sceneMgr } from "./core/Managers/SceneMgr";
 import { uiMgr } from "./core/Managers/UIMgr";
 import { eventMgr } from "./core/Managers/EventMgr";
 import { storageMgr } from "./core/Managers/StorageMgr";
+import { RSUICanvas } from "./core/compent/RSUICanvas";
 
 /**框架类 */
 class RS {
@@ -43,7 +44,7 @@ class RS {
     /**是否完成加载 */
     FinishLoad: boolean = false
     /**消息通知和弹窗画布 */
-    noticeCanvas: Node = null
+    noticeCanvas: RSUICanvas = null
 
     constructor() {
     }
@@ -53,23 +54,26 @@ class RS {
         await new Promise<void>((resolve, reject) => {
             assetManager.loadBundle(this.config.bundleName.rs, (err, bd) => {
                 if (err) {
-                    warn("加载Rs_res Bundle失败" + err)
+                    warn(`加载${this.config.bundleName.rs}失败` + err)
                 } else {
                     this.resources = bd
-                    this.resources.load(this.config.path.noticeCanvas, Prefab, (err, prefab) => {
+                    this.resources.load(this.config.path.RS_UICanvas, Prefab, (err, prefab) => {
                         if (err) {
                             error(err);
                             reject()
                         } else {
-                            let newNode = instantiate(prefab)
-                            newNode.parent = director.getScene()
-                            director.addPersistRootNode(newNode)
-                            this.noticeCanvas = newNode
+                            let canvasNode = instantiate(prefab)
+                            director.getScene().addChild(canvasNode)
+                            director.addPersistRootNode(canvasNode)
+                            this.noticeCanvas = canvasNode.getComponent(RSUICanvas)
                             this.ui.init({
-                                [UIPanelType.Block]: newNode.children[1],
-                                [UIPanelType.BanClick]: newNode.children[2],
-                                [UIPanelType.Popup]: newNode.children[3],
-                                [UIPanelType.NoBg]: newNode.children[4],
+                                [UIPanelType.pop_touchBan]: this.noticeCanvas.popWindowsPar[0],
+                                [UIPanelType.pop_touchclose]: this.noticeCanvas.popWindowsPar[1],
+                                [UIPanelType.pop_touchclose_noBg]: this.noticeCanvas.popWindowsPar[2],
+                                [UIPanelType.top_touchBan]: this.noticeCanvas.topWindowsPar[0],
+                                [UIPanelType.top_touchclose]: this.noticeCanvas.topWindowsPar[1],
+                                [UIPanelType.top_touchclose_noBg]: this.noticeCanvas.topWindowsPar[2],
+                                [UIPanelType.toast]: this.noticeCanvas.toastParent,
                             })
                             prefab.decRef()
                         }
@@ -105,7 +109,6 @@ class RS {
                         reject(err)
                     } else {
                         this.pools.preload(key, prefab)
-                        prefab.decRef()
                         resolve()
                     }
                 })

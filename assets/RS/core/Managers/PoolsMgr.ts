@@ -15,7 +15,11 @@ class PoolEntry {
     /** 获取一个对象（如果池中没有则实例化一个） */
     get(): Node {
         this.lastUseTime = Date.now();
-        return this.pool.size() > 0 ? this.pool.get() : instantiate(this.prefab);
+        const poolItem = this.pool.size() > 0 ? this.pool.get() : instantiate(this.prefab);
+        poolItem.once(Node.EventType.ACTIVE_CHANGED, () => {
+            this.pool.put(poolItem);
+        });
+        return poolItem;
     }
 
     /** 回收一个对象到池中 */
@@ -100,6 +104,7 @@ class PoolsMgr {
     put(key: string, node: Node) {
         const entry = this._pools.get(key);
         if (entry) {
+            node.removeFromParent()
             entry.put(node);
         } else {
             node.destroy();
@@ -113,6 +118,14 @@ class PoolsMgr {
      */
     has(key: string): boolean {
         return this._pools.has(key);
+    }
+    /**
+     * 判断某对象池长度
+     * @param key 池名称
+     * @returns -1则不存在对象池，否则返回对象池长度
+     */
+    poolLength(key: string): number {
+        return this._pools.get(key)?.size() ?? -1;
     }
 
     /**
