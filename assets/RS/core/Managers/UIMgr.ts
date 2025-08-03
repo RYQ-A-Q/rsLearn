@@ -1,6 +1,8 @@
 import { Node, Prefab, instantiate, log, warn } from 'cc';
 import { UIPanelType } from '../constants/SysEnums';
 import { assetManager } from 'cc';
+import { NormalMessage } from '../script/NormalMessage';
+import { VerifyPanel } from '../script/VerifyPanel';
 
 type UIMap = { [key: string]: Node }
 
@@ -42,16 +44,14 @@ export class UIMgr {
             this._panelRoots[type].addChild(node)
             this._panelRoots[type].active = true
             callback?.(node)
-            console.log("对象池长度" + rs.pools.poolLength(cacheKey))
             return
         }
 
-        if (this._uiCache[cacheKey] && (!this._uiCache[cacheKey].active || this._uiCache[cacheKey].parent == null)) {//已经存在并且是不激活状态
+        if (this._uiCache[cacheKey] && (!this._uiCache[cacheKey]?.active || this._uiCache[cacheKey]?.parent == null)) {//已经存在并且是不激活状态
             this._uiCache[cacheKey].active = true
             this._panelRoots[type].addChild(this._uiCache[cacheKey])
             this._panelRoots[type].active = true
             callback?.(this._uiCache[cacheKey])
-            console.log("用旧的")
             return
         }
 
@@ -69,7 +69,29 @@ export class UIMgr {
             callback?.(node)
         })
     }
-
+    /**普通消息通知
+     * @param message 消息文本
+     * @param duration 显示时长
+     */
+    public showToast(message: string, duration: number = 0.8) {
+        this.open("normalToast", "prefab/ui/base/normalToast", UIPanelType.toast, (node) => {
+            if (node) {
+                node.getComponent(NormalMessage).show(message, duration)
+            }
+        })
+    }
+    /**普通确认面板
+     * @param title 标题
+     * @param content 内容
+     * @param callback 回调函数，参数为是否确认 true为确认
+     */
+    public showVerifyPanel(title: string = "请确认", content: string = "确认吗", callback: (isConfirmed: boolean) => void = () => { }) {
+        this.open("normalVerifyPanel", "prefab/ui/base/normalVerifyPanel", UIPanelType.top_touchBan, (node) => {
+            if (node) {
+                node.getComponent(VerifyPanel).init(title, content, callback)
+            }
+        })
+    }
 
     /**
      * 关闭 UI
@@ -86,7 +108,9 @@ export class UIMgr {
         node.active = false
         if (destroy) {
             node.removeFromParent()
-            node.destroy()
+            if (!rs.pools.has(key)) {
+                node.destroy()
+            }
             delete this._uiCache[key]
         }
     }
@@ -113,7 +137,9 @@ export class UIMgr {
             const node = this._uiCache[key]
             if (destroy && node) {
                 node.removeFromParent()
-                node.destroy()
+                if (!rs.pools.has(key)) {
+                    node.destroy()
+                }
             }
         }
         this._uiCache = {}

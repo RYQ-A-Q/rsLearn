@@ -17,11 +17,15 @@ export class PlayDefaultAnimation extends Component {
     recycle() {
         this.selfAni.stop()
         if (rs.pools.has(this.node.name)) {
+            this.node.active = false
             this.node.removeFromParent()
-            rs.pools.put(this.name, this.node)
         } else {
             if (this.isDestroy) {
-                this.node.destroy()
+                if (rs.ui.has(this.node.name)) {
+                    rs.ui.close(this.node.name)
+                } else {
+                    this.node.destroy()
+                }
             } else {
                 this.node.active = false
             }

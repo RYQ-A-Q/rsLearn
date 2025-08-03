@@ -12,7 +12,7 @@ export class ButtonExt_Normal extends Button {
     volume: number = 1;
     _onTouchBegan(event?: EventTouch): void {
         if (this.switchAudio) {
-            rs.audio.playEffect(AudioConfig.getUi(rs.enum.FileName_audioUi[this.clickAudio]), this.volume)
+            rs.audio.playEffect(AudioConfig.getUi(rs.enum.FileName_audioUi[this.clickAudio]), this.volume, true)
         }
         super._onTouchBegan(event);
     }

@@ -53,10 +53,8 @@ class AudioMgr {
      */
     public playEffect(path: string, volume: number = 1.0, onShot: boolean = false, bundleName: string = null): Node {
         if (this.allAclicp[path]) {
-            console.log("旧的" + path)
             return this.playEffectClip(this.allAclicp[path], onShot, volume);
         } else {
-            console.log("新的" + path)
             if (bundleName != null) {
                 rs.bundle.getBundle(bundleName).then((bundle) => {
                     if (bundle) {
