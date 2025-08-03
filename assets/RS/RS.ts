@@ -76,9 +76,9 @@ class RS {
                                 [UIPanelType.toast]: this.noticeCanvas.toastParent,
                             })
                             prefab.decRef()
+                            resolve()
                         }
                     })
-                    resolve()
                 }
             })
         })
@@ -93,8 +93,9 @@ class RS {
                             error(`加载${rs.config.bundleName.audio} Bundle失败` + err)
                             reject(err)
                         } else {
-                            this.audio.init(jsonAsset.json, bd)
+                            this.audio.init(jsonAsset.json, bd, this.noticeCanvas.audioSourceGroup)
                             this.FinishLoad = true
+                            jsonAsset.decRef()
                             resolve()
                         }
                     })

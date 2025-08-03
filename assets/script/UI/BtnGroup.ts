@@ -22,6 +22,12 @@ export class BtnGroup extends Component {
         UIController.normalMessage("清除")
 
     }
+    private clearAu() {
+        rs.audio.destroyAllClips()
+        console.log("清除2")
+        UIController.normalMessage("清除2")
+
+    }
 }
 
 

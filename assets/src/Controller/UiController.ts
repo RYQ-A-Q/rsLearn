@@ -7,7 +7,7 @@ export class UIController {
     public static instance() { return this._instance }
 
     /**普通消息通知 */
-    public static normalMessage(message: string, duration: number = 0.5) {
+    public static normalMessage(message: string, duration: number = 0.8) {
         rs.ui.open("normalToast", "prefab/ui/base/normalToast", UIPanelType.toast, (node) => {
             if (node) {
                 node.getComponent(NormalMessage).show(message, duration)

@@ -14,6 +14,9 @@ export class RSUICanvas extends Component {
     topWindowsPar: Node[] = []
     @property({ type: Node, displayName: '消息弹窗父节点' })
     toastParent: Node
+    @property({ type: Node, displayName: '音效节点组' })
+    audioSourceGroup: Node
+
     onLoad(): void {
         this.registerEvent(true)
     }

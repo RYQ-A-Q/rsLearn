@@ -16,9 +16,9 @@ export class NormalMessage extends Component {
     /**
      * 显示消息
      * @param message 显示内容
-     * @param duration 停留时间（秒），默认0.5
+     * @param duration 停留时间（秒），默认0.8
      */
-    public show(message: string, duration: number = 0.5) {
+    public show(message: string, duration: number = 0.8) {
         this.stopAni();
         this._stayDuration = duration;
         this.text.string = message;

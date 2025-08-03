@@ -7,7 +7,7 @@ export class AudioConfig {
     }
     /** 根据名字获取Bgm，name为配置json文件中的键名,新增文件时请先增加rs.enum.FileName_audioBG中的枚举名字 */
     public static getBGM(name: (typeof rs.enum.FileName_audioBG)[keyof typeof rs.enum.FileName_audioBG]): string {
-        return AudioConfig.config?.bgm?.[name] ?? "";
+        return AudioConfig.config?.bg?.[name] ?? "";
     }
     /** 根据名字获取Ui音效，name为配置json文件中的键名,新增文件时请先增加rs.enum.FileName_audioUi中的枚举名字 */
     public static getUi(name: (typeof rs.enum.FileName_audioUi)[keyof typeof rs.enum.FileName_audioUi]): string {

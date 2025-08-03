@@ -10,7 +10,7 @@ export const RSConfig = {
         rs: "RS_sys",
         audio: "RS_media",
     },
-    /**资源路径 */
+    /**资源路径，基于rs包 */
     path: {
         /**音频路径指引文件 */
         audioPathConfigJSON: "data/config/audioConfig",
@@ -20,6 +20,6 @@ export const RSConfig = {
     /*对象池配置 */
     poolsConfig: {
         /**默认预制体生成大小 */
-        size: 3
+        size: 10
     }
 }

@@ -30,7 +30,7 @@ export class GameMazeMgr extends Component {
     private exitPosition: { x: number, y: number } = { x: 0, y: 0 };
 
     start() {
-        rs.audio.playBg(AudioConfig.getBGM(rs.enum.FileName_audioBG.game_day), 1, true)
+        rs.audio.playBg(AudioConfig.getBGM(rs.enum.FileName_audioBG.normalBg), 1, true)
         this.playerUIT = this.playerNode.getComponent(UITransform)
         let size = this.node.scene.getChildByName("Canvas").getComponent(UITransform).contentSize
         this.maskUIT.node.children[0].getComponent(UITransform).setContentSize(size.width * 2, size.height * 2)
